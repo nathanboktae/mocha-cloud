@@ -147,7 +147,12 @@ Cloud.prototype.start = function(fn){
       var browser = wd.remote('ondemand.saucelabs.com', 80, self.user, self.key);
       self.emit('init', conf);
 
-      browser.init(conf, function(_, id, session) {
+      browser.init(conf, function(initErr, id, session) {
+        if (initErr) {
+          debug('browser.init(%s) error: %s', self.url, err);
+          return done(err);
+        }
+
         debug('open %s', self._url);
         self.emit('start', session);
 
