@@ -149,8 +149,8 @@ Cloud.prototype.start = function(fn){
 
       browser.init(conf, function(initErr, id, session) {
         if (initErr) {
-          debug('browser.init(%s) error: %s', self.url, err);
-          return done(err);
+          debug('browser.init(%s) error: %s', self.url, initErr);
+          return done(initErr);
         }
 
         debug('open %s', self._url);
